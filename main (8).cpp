@@ -1,0 +1,124 @@
+/**************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+***************************/
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // Inisialisasi HP karakter dan musuh
+    int hpKarakter, hpMusuh = 200;
+
+    // Pilihan karakter
+    cout << "Pilih karakter :" << endl;
+    cout << "1. Ksatria " << endl;
+    cout << "2. Pemanah " << endl;
+    cout << "3. Medis  " << endl;
+    cout << "Pilihan : ";
+    int karakterChoice;
+    cin >> karakterChoice;
+
+    // Pilihan senjata
+    cout << "Pilih senjata : " << endl;
+    cout << "1. Pedang " << endl;
+    cout << "2. Panah " << endl;
+    cout << "3. Medkit " << endl;
+    cout << "Pilihan : ";
+    int senjataChoice;
+    cin >> senjataChoice;
+
+    // Menentukan karakter yang dipilih
+    string karakter;
+    switch (karakterChoice) {
+        case 1:
+            karakter = "Ksatria";
+            hpKarakter = 110;
+            break;
+        case 2:
+            karakter = "Pemanah";
+            hpKarakter = 110;
+            break;
+        case 3:
+            karakter = "Medis";
+            hpKarakter = 130;
+            break;
+        default:
+            cout << "Pilihan karakter tidak valid." << endl;
+            return 1;
+    }
+
+    // Menentukan senjata yang dipilih
+    string senjata;
+    int damageSenjata = 25;  // Damage default
+    switch (senjataChoice) {
+        case 1:
+            senjata = "Pedang";
+            damageSenjata += 10;
+            break;
+        case 2:
+            senjata = "Panah";
+            damageSenjata += 5;
+            break;
+        case 3:
+            senjata = "Medkit";
+            break;
+        default:
+            cout << "Pilihan senjata tidak valid." << endl;
+            return 1;
+    }
+
+    // Loop pertarungan
+    while (true && hpKarakter > 0 && hpMusuh > 0) {
+        // Pilihan tindakan
+        cout << "Pilih tindakan : " << endl;
+        cout << "1. Serang " << endl;
+        cout << "2. Memulihkan " << endl;
+        cout << "Pilihan : ";
+        int tindakanChoice;
+        cin >> tindakanChoice;
+
+        // Menentukan tindakan yang dipilih
+        switch (tindakanChoice) {
+            case 1:
+                // Serang
+                cout << karakter << " menyerang dengan " << senjata << "." << endl;
+                hpMusuh -= damageSenjata;
+                cout << "Musuh menerima " << damageSenjata << " damage. HP musuh: " << hpMusuh << endl;
+
+                // Serangan balasan dari musuh
+                cout << "Musuh menyerang kembali dengan damage +35." << endl;
+                hpKarakter -= 35;
+                cout << karakter << " menerima 35 damage. HP " << karakter << ": " << hpKarakter << endl;
+                break;
+            case 2:
+                // Memulihkan
+                hpKarakter += 10;  // Menambah HP sebanyak 10
+                cout << karakter << " menggunakan " << senjata << " untuk memulihkan diri. HP bertambah menjadi " << hpKarakter << "." << endl;
+
+                // Serangan balasan dari musuh
+                cout << "Musuh menyerang dengan damage +35." << endl;
+                hpKarakter -= 35;
+                cout << karakter << " menerima 35 damage. HP " << karakter << ": " << hpKarakter << endl;
+                break;
+            default:
+                cout << "Pilihan tindakan tidak valid." << endl;
+                return 1;
+        }
+    }
+
+    // Menentukan pemenang
+    if (hpKarakter <= 0) {
+        cout << "Game Over! Musuh menang." << endl;
+    } else {
+        cout << "Selamat! " << karakter << " menang!" << endl;
+    }
+
+    return 1;
+}
